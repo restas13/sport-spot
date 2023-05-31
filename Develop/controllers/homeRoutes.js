@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
         });
 
         const libraries = dbLibData.map((library) =>
-            gallery.get({ plain: true })
+            Library.get({ plain: true })
         );
 
         res.render('homepage', {
