@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
         });
 
         const libraries = dbLibData.map((library) =>
-            gallery.get({ plain: true })
+            Library.get({ plain: true })
         );
 
         res.render('homepage', {
@@ -46,7 +46,10 @@ router.get('/posts/:id', async (req, res) => {
         res.render('indPost');
     } catch (err) {
         console.log(err);
-        res.status(500).json(err);
+        res.status(err.status || 500).json({
+            message: err.message,
+            error: err,
+        });
     }
 })
 
