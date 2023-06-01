@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS nbablog_db;
+CREATE DATABASE nbablog_db;

@@ -1,0 +1,13 @@
+{{> navbar}}
+
+<h1>Add Post and Comment</h1>
+
+<h2>{{team1}} vs {{team2}}</h2>
+<p>Date: {{formatDate date}}</p>
+<p>Result: {{result}}</p>
+
+<form id="postForm">
+  <input type="text" id="postTitle" placeholder="Title" required>
+  <textarea id="postContent" placeholder="Content" required></textarea>
+  <button type="submit">Submit</button>
+</form>

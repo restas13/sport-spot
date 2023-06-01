@@ -1,0 +1,11 @@
+{{> navbar}}
+
+<h1>Last Trending NBA Results</h1>
+
+{{#each games}}
+  <div class="game-card">
+    <h2>{{team1}} vs {{team2}}</h2>
+    <p>Date: {{formatDate date}}</p>
+    <p>Result: {{result}}</p>
+  </div>
+{{/each}}
