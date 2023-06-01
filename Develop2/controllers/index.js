@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-// Define the routes for frontend views
-router.get('/', (req, res) => {
-  // Render the homepage view
-});
+// Import the necessary routes
+const homeRoutes = require('./homeRoutes');
+const searchRoutes = require('./searchRoutes');
+const postRoutes = require('./postRoutes');
+const commentRoutes = require('./commentRoutes');
 
-router.get('/search', (req, res) => {
-  // Render the search results view
-});
-
-router.get('/posts', (req, res) => {
-  // Render the posts view
-});
+// Define the routes
+router.use('/', homeRoutes);
+router.use('/search', searchRoutes);
+router.use('/posts', postRoutes);
+router.use('/comments', commentRoutes);
 
 module.exports = router;
