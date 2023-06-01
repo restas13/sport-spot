@@ -1,30 +1,123 @@
-const router = require('express').Router();
-const { Post } = require('../models');
+const express = require('express');
+const router = express.Router();
+const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// Define the POST route for adding a post
-router.post('/posts', async (req, res) => {
+// Add your post routes here
+
+// Get all posts
+router.get('/', async (req, res) => {
   try {
-    // Create a new post with the provided data
-    const newPost = await Post.create(req.body);
-
-    // Return the newly created post
-    res.status(200).json(newPost);
+    const posts = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+      ],
+    });
+    res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
-// Define the GET route for retrieving all posts
-router.get('/posts', async (req, res) => {
+// Get a specific post by ID
+router.get('/:id', async (req, res) => {
   try {
-    // Retrieve all posts
-    const posts = await Post.findAll();
+    const post = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+      ],
+    });
 
-    // Return the posts
-    res.status(200).json(posts);
+    if (!post) {
+      res.status(404).json({ message: 'No post found with this id.' });
+      return;
+    }
+
+    res.status(200).json(post);
   } catch (err) {
-    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// Create a new post
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.user_id,
+    });
+
+    res.status(201).json(newPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update a post
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const post = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
+
+    if (!post[0]) {
+      res.status(404).json({ message: 'No post found with this id.' });
+      return;
+    }
+
+    res.status(200).json({ message: 'Post updated successfully.' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Delete a post
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const post = await Post.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!post) {
+      res.status(404).json({ message: 'No post found with this id.' });
+      return;
+    }
+
+    res.status(200).json({ message: 'Post deleted successfully.' });
+  } catch (err) {
     res.status(500).json(err);
   }
 });

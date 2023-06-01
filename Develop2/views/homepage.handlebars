@@ -1,0 +1,76 @@
+{{> navbar}}
+
+<h1>Last Trending NBA Results</h1>
+
+{{#each games}}
+  <div class="game-card">
+    <h2>{{team1}} vs {{team2}}</h2>
+    <p>Date: {{formatDate date}}</p>
+    <p>Result: {{result}}</p>
+  </div>
+{{/each}}
+
+
+{{!< main}}
+
+{{!-- This is the home view --}}
+
+{{!-- Include necessary CSS and JavaScript files --}}
+{{!-- Adjust the paths based on your file structure --}}
+{{!-- For example, assuming your CSS and JavaScript files are in the "public" folder --}}
+<link rel="stylesheet" href="/css/home.css">
+<script src="/js/homepage.js"></script>
+
+{{!-- Render the game cards --}}
+<div id="games-container">
+  {{!-- Game cards will be dynamically added here --}}
+</div>
+
+
+{{#layout 'main'}}
+<section class="card text-center">
+    <div class="card-body">
+        <h3 class="card-title">Welcome to the Sport App</h3>
+        <!-- Your homepage content goes here -->
+    </div>
+</section>
+{{/layout}}
+
+
+
+{{!-- homepage.handlebars --}}
+
+{{#if isAuthenticated}}
+<section class="card text-center">
+  <div class="card-body">
+    <h3 class="card-title">Create a Post</h3>
+    <form id="post-form">
+      <div class="card-text">
+        <label for="postTitle">Title</label>
+        <input type="text" placeholder="Post Title" id="postTitle">
+      </div>
+      <div class="card-text">
+        <label for="postContent">Content</label>
+        <textarea placeholder="Post Content" id="postContent"></textarea>
+      </div>
+      <button type="submit">Create Post</button>
+    </form>
+  </div>
+</section>
+{{/if}}
+
+{{#each posts}}
+<section class="card post-card">
+  <div class="card-body">
+    <h3 class="card-title">{{title}}</h3>
+    <p class="card-text">{{content}}</p>
+    <p class="card-text">By {{user.username}}</p>
+    {{#if isAuthenticated}}
+    <button class="delete-post" data-id="{{id}}">Delete</button>
+    <a href="/post/{{id}}">View Post</a>
+    {{/if}}
+  </div>
+</section>
+{{/each}}
+
+<script src="/js/homepage.js"></script>

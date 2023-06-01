@@ -1,21 +1,83 @@
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport App</title>
+    <!-- Include your CSS files here -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                {{#if isAuthenticated}}
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{{body}}}
+    </main>
+
+    {{#if isAuthenticated}}
+    <!-- Include your JavaScript files here -->
+    <script src="/js/main.js"></script>
+    {{/if}}
+
+    <footer>
+        <!-- Include the footer content here -->
+        <p>&copy; 2023 Sport app. All rights reserved.</p>
+    </footer>
+
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NBA Game Tracker</title>
+  <title>Tech Blog</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  {{> header}}
 
-  <main>
+<body>
+  <header>
+    <nav>
+      {{#if isAuthenticated}}
+      <span>Welcome, {{username}}!</span>
+      <a href="/logout">Logout</a>
+      {{else}}
+      <a href="/signup">Signup</a>
+      <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+  </header>
+  <main class="container">
     {{{body}}}
   </main>
-
-  {{> footer}}
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="/js/main.js"></script>
+  <footer>
+    <p>&copy; 2023 Sport app. All rights reserved.</p>
+  </footer>
 </body>
+
 </html>
+
+
+
+  
+
+

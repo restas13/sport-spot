@@ -1,6 +1,5 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const allRoutes = require("./controllers");
 const session = require("express-session");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -11,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 
 const { User, Blog, Comment } = require("./models");
 
+// Set up middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const sess = {
@@ -27,16 +27,20 @@ const sess = {
 };
 app.use(session(sess));
 
-app.use(express.static('public'));
+// Set up handlebars as the template engine
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 
-const hbs = exphbs.create({});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+// Serve static files from the public directory
+app.use(express.static("public"));
 
-app.use("/", allRoutes);
+// Import and use the routes
+const allRoutes = require("./controllers");
+app.use(allRoutes);
 
-sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+// Sync the database and start the server
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`App listening on PORT ${PORT}`);
   });
 });

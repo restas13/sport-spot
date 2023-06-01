@@ -1,0 +1,8 @@
+{{!-- comments.handlebars --}}
+
+{{#each comments}}
+<div class="comment-card">
+    <p>{{content}}</p>
+    <p>Posted by: {{user.username}}</p>
+</div>
+{{/each}}
