@@ -1,12 +1,19 @@
 const router = require('express').Router();
-const { Library, SportPost } = require('../models')
+const { User, Post, Comment } = require('../models')
+
+const testData = [{
+    title: 'The mavericks are pretty good this year!',
+    message: 'I\'m happy with their performance on tuesday and I\'m running out of text to write',
+    aithor: 'reed',
+}
+]
 
 router.get('/', async (req, res) => {
-    /*try {
-        const dbLibData = await Library.findAll({
+    try {
+        const dbLibData = await Comment.findAll({
             include: [
                 {
-                    model: SportPost,
+                    model: Post,
                     attributes: ['author', 'message'],
                 },
             ]
@@ -16,23 +23,29 @@ router.get('/', async (req, res) => {
             Library.get({ plain: true })
         );
 
+        console.log('hello test');
+        console.log(libraries);
+
         res.render('homepage', {
-            libraries,
+            testData,
             loggedIn: req.session.loggedIn,
         });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
-    }*/
+    }
+    /*
     console.log('working?');
     try{
         console.log('working2.0');
-        //res.render('homepage');
-        res.send('hello');
+        res.render('homepage', {
+
+        });
+        //res.send('hello');
     }catch (err) {
         console.log(err);
         res.status(err.status || 500).json(err);
-    }
+    }*/
 });
 
 
@@ -42,7 +55,7 @@ router.get('/posts/:id', async (req, res) => {
         const dbLibData = await Library.findByPk(req.params.id, {
             include: [
                 {
-                    model: SportPost,
+                    model: Post,
                     attributes: [
                         'id',
                         'message',
@@ -77,7 +90,7 @@ router.get('/posts/:user', async (req, res) => {
         const dbUserPosts = await Library.findByPk(req.params.user, {
             include: [
                 {
-                    model: SportPost,
+                    model: Post,
                     attributes: [
                         'id',
                         'message',
