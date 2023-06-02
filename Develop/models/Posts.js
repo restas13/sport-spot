@@ -26,7 +26,7 @@ Post.init(
         author_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'gallery',
+                model: 'library',
                 key: 'id',
             }
         }
