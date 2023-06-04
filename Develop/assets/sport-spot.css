@@ -32,7 +32,7 @@
   header, footer, article, nav {
     padding: 1em;
   }
-   .sidebar { background:#0f49f1;  margin-bottom: 10px;   padding: 10px;
+   .sidebar { background:#85bb65d5;  margin-bottom: 10px;   padding: 10px;
     border-radius: 5px;text-align: center; width: 200px; height:auto;}
   .input-field, .user-id-field {
     margin-bottom: 10px; height: px
@@ -88,3 +88,5 @@
     border-radius: 5px;
     margin-bottom: 10px;
   }
+
+  footer{text-align: center;}

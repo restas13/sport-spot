@@ -1,0 +1,41 @@
+ /* CSS styles for the top section */
+ #top-section {
+    background-color: #78c98b;
+    padding: 20px;
+    text-align: center;
+  }
+
+  #score {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    ;height: 350px;
+  }
+
+  /* CSS styles for the bottom section */
+  #bottom-section {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center; font-style: white;
+  }
+
+  #comments {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    height: 500px;
+  }
+
+  .comment {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .comment span {
+    font-weight: bold;
+  }
+
+  #new-comment {
+    margin-top: 20px;
+  }
