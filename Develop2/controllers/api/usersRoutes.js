@@ -2,56 +2,53 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../../models');
 
-// Add your user routes here
-
-// Signup route
+// Define the POST route for user signup
 router.post('/signup', async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    const newUser = await User.create(req.body);
+
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.user_id = newUser.id;
       req.session.logged_in = true;
-      res.status(200).json(user);
+
+      res.status(200).json(newUser);
     });
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// Login route
+// Define the POST route for user login
 router.post('/login', async (req, res) => {
   try {
-    const user = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
-    });
+    const userData = await User.findOne({ where: { username: req.body.username } });
 
-    if (!user) {
+    if (!userData) {
       res.status(400).json({ message: 'Incorrect username or password. Please try again.' });
       return;
     }
 
-    const validPassword = await user.checkPassword(req.body.password);
+    const isValidPassword = await userData.checkPassword(req.body.password);
 
-    if (!validPassword) {
+    if (!isValidPassword) {
       res.status(400).json({ message: 'Incorrect username or password. Please try again.' });
       return;
     }
 
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.user_id = userData.id;
       req.session.logged_in = true;
-      res.status(200).json({ message: 'You are now logged in.' });
+
+      res.status(200).json({ user: userData, message: 'You are now logged in.' });
     });
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// Logout route
+// Define the POST route for user logout
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -63,5 +60,3 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
-
-

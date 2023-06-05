@@ -1,52 +1,26 @@
-{{!-- post.handlebars --}}
+<div class="post-card">
+  <form class="post-form">
+    <input type="text" placeholder="Write a post" name="post">
+    <button type="submit">Add Post</button>
+  </form>
+</div>
 
-<section class="card text-center">
-  <div class="card-body">
-    <h3 class="card-title">{{post.title}}</h3>
-    <p class="card-text">{{post.content}}</p>
-    <p class="card-text">By {{post.user.username}}</p>
-  </div>
-</section>
-
-<section class="card comments-card">
-  <div class="card-body">
-    <h4 class="card-title">Comments</h4>
-    {{#each post.comments}}
-    <div class="comment">
-      <p class="comment-author">{{user.username}}:</p>
-      <p class="comment-content">{{content}}</p>
-    </div>
+{{#each posts}}
+<div class="post-card">
+  <h2>{{title}}</h2>
+  <p>{{content}}</p>
+  <p>Posted by: {{user.username}}</p>
+  <p>Comments:</p>
+  <ul>
+    {{#each comments}}
+    <li>{{this}}</li>
     {{/each}}
-  </div>
-</section>
-
-{{#if isAuthenticated}}
-<section class="card add-comment-card">
-  <div class="card-body">
-    <h4 class="card-title">Add a Comment</h4>
-    <form id="comment-form">
-      <div class="card-text">
-        <textarea placeholder="Comment" id="commentContent"></textarea>
-      </div>
-      <button type="submit">Add Comment</button>
-    </form>
-  </div>
-</section>
-
-<section class="card add-post-card">
-  <div class="card-body">
-    <h4 class="card-title">Write a Post</h4>
-    <form id="post-form">
-      <div class="card-text">
-        <input type="text" placeholder="Title" id="postTitle">
-      </div>
-      <div class="card-text">
-        <textarea placeholder="Content" id="postContent"></textarea>
-      </div>
-      <button type="submit">Add Post</button>
-    </form>
-  </div>
-</section>
-{{/if}}
+  </ul>
+  <form class="comment-form">
+    <input type="text" placeholder="Write a comment" name="comment">
+    <button type="submit">Add Comment</button>
+  </form>
+</div>
+{{/each}}
 
 <script src="/js/post.js"></script>

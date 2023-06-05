@@ -1,8 +1,58 @@
-{{!-- comments.handlebars --}}
+{{!-- comment.handlebars --}}
 
-{{#each comments}}
-<div class="comment-card">
+<div id="comments-container">
+  {{#each comments}}
+  <div class="comment-card">
     <p>{{content}}</p>
     <p>Posted by: {{user.username}}</p>
+  </div>
+  {{/each}}
 </div>
-{{/each}}
+
+<form id="comment-form">
+  <input type="text" placeholder="Write a comment" name="comment-input" id="comment-input">
+  <button type="submit">Add Comment</button>
+</form>
+
+<script src="/js/comment.js"></script>
+
+
+
+
+// Assuming you have the Handlebars library included in your project
+
+// Get the HTML template from a script tag or load it from a file
+const commentTemplate = `
+  <div id="comments-container">
+    {{#each comments}}
+    <div class="comment-card">
+      <p>{{content}}</p>
+      <p>Posted by: {{user.username}}</p>
+    </div>
+    {{/each}}
+  </div>
+
+  <form id="comment-form">
+    <input type="text" placeholder="Write a comment" name="comment-input" id="comment-input">
+    <button type="submit">Add Comment</button>
+  </form>
+`;
+
+// Compile the template
+
+const template = Handlebars.compile(commentTemplate);
+
+// Render the template with data
+
+
+const commentsData = {
+  comments: [
+    // Your comment data here
+  ]
+};
+
+const renderedHtml = template(commentsData);
+
+// Append the rendered HTML to a container element
+const container = document.getElementById('container');
+container.innerHTML = renderedHtml;

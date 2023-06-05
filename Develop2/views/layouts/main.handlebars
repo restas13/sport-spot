@@ -1,5 +1,3 @@
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,43 +39,3 @@
     </footer>
 
 </html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Blog</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-  <header>
-    <nav>
-      {{#if isAuthenticated}}
-      <span>Welcome, {{username}}!</span>
-      <a href="/logout">Logout</a>
-      {{else}}
-      <a href="/signup">Signup</a>
-      <a href="/login">Login</a>
-      {{/if}}
-    </nav>
-  </header>
-  <main class="container">
-    {{{body}}}
-  </main>
-  <footer>
-    <p>&copy; 2023 Sport app. All rights reserved.</p>
-  </footer>
-</body>
-
-</html>
-
-
-
-  
-
-

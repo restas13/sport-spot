@@ -1,11 +1,27 @@
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
-const { User, Post, Comment } = require('../models');
-const withAuth = require('../utils/auth');
+const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../util/auth');
 
 // Home route
 router.get('/', async (req, res) => {
   try {
+    // Fetch the last four trending NBA games from the API
+    const response = await axios.get('https://api-nba-v1.p.rapidapi.com/games', {
+      headers: {
+        'X-RapidAPI-Key': '12e5cc60c495f0b959a91981be861758',
+        'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
+      },
+      params: {
+        trend: 'true',
+        limit: 4
+      }
+    });
+
+    // Extract the game data from the API response
+    const games = response.data.api.games;
+
     const postData = await Post.findAll({
       include: [
         {
@@ -24,9 +40,10 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', { posts, isAuthenticated: req.session.logged_in });
-  } catch (err) {
-    res.status(500).json(err);
+    res.render('homepage', { games, posts, isAuthenticated: req.session.logged_in });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -75,19 +92,10 @@ router.get('/post/:id', withAuth, async (req, res) => {
     const post = postData.get({ plain: true });
 
     res.render('post', { post, isAuthenticated: req.session.logged_in });
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-

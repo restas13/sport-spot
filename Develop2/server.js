@@ -1,42 +1,34 @@
-const express = require("express");
-const exphbs = require("express-handlebars");
-const session = require("express-session");
-const sequelize = require("./config/connection");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-require('dotenv').config();
+const express = require('express');
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const { User, Blog, Comment } = require("./models");
-
-// Set up middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// Set up session
 const sess = {
-  secret: process.env.DB_SESSION_SECRET,
-  cookie: {
-    // 30 min
-    maxAge: 0.5 * 60 * 60 * 1000
-  },
+  secret: 'yourSecretSessionKey',
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
+  cookie: {
+    maxAge: 86400000, // 24 hours
+  },
 };
 app.use(session(sess));
 
 // Set up handlebars as the template engine
-app.engine("handlebars", exphbs());
-app.set("view engine", "handlebars");
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
-// Serve static files from the public directory
-app.use(express.static("public"));
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-// Import and use the routes
-const allRoutes = require("./controllers");
-app.use(allRoutes);
+// Routes
+app.use(routes);
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {

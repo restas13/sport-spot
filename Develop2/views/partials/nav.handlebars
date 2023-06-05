@@ -1,9 +1,13 @@
-<nav>
-  {{#if isAuthenticated}}
-  <span>Welcome, {{username}}!</span>
-  <a href="/logout">Logout</a>
-  {{else}}
-  <a href="/signup">Signup</a>
-  <a href="/login">Login</a>
-  {{/if}}
-</nav>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      {{#if isAuthenticated}}
+        <li><a href="/logout">Logout</a></li>
+      {{else}}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+</header>
