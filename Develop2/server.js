@@ -1,8 +1,14 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
 const session = require('express-session');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
+const path = require('path');
+
+const exphbs = require('express-handlebars').create({
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials')
+});
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,13 +25,14 @@ const sess = {
 app.use(session(sess));
 
 // Set up handlebars as the template engine
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(routes);

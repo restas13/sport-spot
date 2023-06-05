@@ -1,12 +1,17 @@
 const router = require('express').Router();
-
-// Import the necessary models
+const { Comment } = require('../../models');
 
 // Define the POST route for adding a comment
-router.post('/comments', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     // Create a new comment with the provided data
-    // Return the newly created comment
+    const newComment = await Comment.create({
+      content: req.body.commentText,
+      user_id: req.session.user_id,
+      post_id: req.body.postId
+    });
+
+    res.status(200).json(newComment);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -14,10 +19,15 @@ router.post('/comments', async (req, res) => {
 });
 
 // Define the GET route for retrieving comments for a specific NBA result
-router.get('/comments/:resultId', async (req, res) => {
+router.get('/:resultId', async (req, res) => {
   try {
     // Retrieve all comments for the specified NBA result
-    // Return the comments
+    const comments = await Comment.findAll({
+      where: { post_id: req.params.resultId },
+      include: 'user'
+    });
+
+    res.status(200).json({ comments });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

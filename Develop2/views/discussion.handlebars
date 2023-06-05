@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discussion Page</title>
+  <!-- Add any necessary stylesheets -->
+</head>
+<body>
+  <h1>Discussion Page for Game ID: <%= gameId %></h1>
+
+  <!-- Add a form to post a new post -->
+  <form action="/discussion/<%= gameId %>/posts" method="POST">
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="content" placeholder="Content" required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <!-- Display existing posts -->
+  <% posts.forEach(post => { %>
+    <div>
+      <h2><%= post.title %></h2>
+      <p><%= post.content %></p>
+      <!-- Add a form to update/delete the post -->
+      <form action="/discussion/<%= gameId %>/posts/<%= post._id %>?_method=PUT" method="POST">
+        <input type="text" name="title" value="<%= post.title %>" required>
+        <textarea name="content" required><%= post.content %></textarea>
+        <button type="submit">Update</button>
+      </form>
+      <form action="/discussion/<%= gameId %>/posts/<%= post._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }); %>
+
+  <!-- Add any necessary JavaScript code -->
+  <script src="/js/public.js"></script>
+</body>
+</html>

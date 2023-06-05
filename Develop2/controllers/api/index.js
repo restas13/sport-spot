@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // Import your API routes here
-const usersRoutes = require('./usersRoutes');
-const postsRoutes = require('./postsRoutes');
+const usersRoutes = require('./userRoutes');
+const postsRoutes = require('./postRoutes');
 const homeRoutes = require('./homeRoutes');
 const commentRoutes = require('./commentRoutes');
 
