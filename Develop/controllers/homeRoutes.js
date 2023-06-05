@@ -66,7 +66,7 @@ router.get('/posts/:id', async (req, res) => {
 
         const selPost = testData[0];
 
-        console.log("parameter is " + req.params['id'])
+        console.log(req.params.id);
         console.log(selPost);
 
         res.render('homepage', 
