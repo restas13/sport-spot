@@ -1,12 +1,12 @@
 // Function to fetch the last four game results from the NBA API
-const fetchLastFourGameResults = async () => {
-  try {
-    const response = await axios.get('https://api.example.com/nba/results', {
-      params: {
-        limit: 4,
-        sort: 'desc',
-      },
-    });
+//const fetchLastFourGameResults = async () => {
+  //try {
+    //const response = await axios.get('https://odds.p.rapidapi.com/v4/sports', {
+      //params: {
+        //limit: 4,
+        //sort: 'desc',
+      //},
+    //});
 
     const gameResults = response.data.results;
 
