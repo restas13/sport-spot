@@ -44,14 +44,7 @@ header {
   margin: auto; /* to center the header */
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #a9b0b4;
-  height: 10vh;
-  line-height: 5vh; 
-}
+
 
 
 
