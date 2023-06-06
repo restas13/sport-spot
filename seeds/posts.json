@@ -1,6 +1,12 @@
 [
     {
         "title": "Nuggets did Great!",
-        "content": "The nuggets pulled off a great win against the lakers!"
+        "content": "The nuggets pulled off a great win against the lakers!",
+        "author": "Reed"
+    },
+    {
+        "title": "I wonder how Lebron's doing?",
+        "content": "Lebron seemed to be pretty upset after the recent loss agains the bulls, maybe he is injured or unhappy with his performance",
+        "author": "Basketball4ever"
     }
 ]

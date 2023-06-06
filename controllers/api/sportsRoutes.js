@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Library, SportPost } = require('../../models');
+const { User, Library, SportPost, Post } = require('../../models');
 const express = require('express');
 
 router.get('/posts', async (req, res) => {
@@ -19,6 +19,26 @@ router.get('/posts', async (req, res) => {
         );
 
         res.send(libraries);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+router.post('/posts', async (req, res) => {
+    try {
+        const userLibData = await User.findOne({ where: { id: 1 } });
+
+        console.log(userLibData);
+
+        console.log(req.session);
+        const newPost = await Post.create({
+            ...req.body,
+            user_id: req.session.user_id,
+            author: userLibData.username,
+        });
+
+        res.status(200).json(newPost);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
