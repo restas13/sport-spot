@@ -24,7 +24,7 @@ router.get('/', /*withAuth,*/ async (req, res) => {
             include: [
                 {
                     model: Post,
-                    attributes: ['author', 'message'],
+                    attributes: ['user_id', 'content'],
                 },
             ]
         });
@@ -51,7 +51,7 @@ router.get('/', /*withAuth,*/ async (req, res) => {
 
 
 // gets the posts with the id in the web address
-router.get('/posts/:id', async (req, res) => {
+router.get('/posts/:id', withAuth, async (req, res) => {
     try {
         const dbLibData = await Comment.findByPk(req.params.id, {
             include: [
@@ -59,8 +59,8 @@ router.get('/posts/:id', async (req, res) => {
                     model: Post,
                     attributes: [
                         'id',
-                        'message',
-                        'post_date',
+                        'content',
+                        ///'post_date',
                     ],
                 },
             ],
@@ -95,7 +95,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/posts/user/:user', async (req, res) => {
+router.get('/posts/user/:user', withAuth, async (req, res) => {
     try {
         const dbLibData = await Comment.findByPk(req.params.user, {
             include: [
@@ -103,8 +103,8 @@ router.get('/posts/user/:user', async (req, res) => {
                     model: Post,
                     attributes: [
                         'id',
-                        'message',
-                        'post_date',
+                        'content',
+                        //'post_date',
                     ],
                 },
             ],
