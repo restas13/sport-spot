@@ -147,6 +147,7 @@ router.get('/posts/user/:user', async (req, res) => {
     res.render('login');
 });
 
+/*
 router.get('/posts/search', async (req, res) => {
     try{
         const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
@@ -172,7 +173,7 @@ router.get('/posts/search', async (req, res) => {
         res.status(err.status || 500).json();
     }
 });
-
+*/
 router.get('*', (req, res) => {
     try {
         res.render('error');
