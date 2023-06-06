@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
             Library.get({ plain: true })
         );
 
+        console.log(req.session.loggedIn);
         console.log('hello test');
         console.log(libraries);
 
@@ -64,9 +65,9 @@ router.get('/posts/:id', async (req, res) => {
 
         //const library = dbLibData.get({ plain: true });
 
-        const selPost = testData[0];
+        const selPost = [testData[req.params.id - 1]];
 
-        console.log(req.params.id);
+        console.log(req.params.id - 1);
         console.log(selPost);
 
         res.render('homepage', 
@@ -91,9 +92,9 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/posts/:user', async (req, res) => {
+router.get('/posts/user/:user', async (req, res) => {
     try {
-        const dbUserPosts = await Library.findByPk(req.params.user, {
+        const dbLibData = await Comment.findByPk(req.params.user, {
             include: [
                 {
                     model: Post,
@@ -101,14 +102,33 @@ router.get('/posts/:user', async (req, res) => {
                         'id',
                         'message',
                         'post_date',
-                    ]
-                }
-            ]
+                    ],
+                },
+            ],
         });
 
-        const selectposts = dbUserPosts.get({ plain: true });
+        //const selectposts = dbUserPosts.get({ plain: true });
 
-        res.render('');
+        const selPost = [];
+
+        for (var i = 0; i < testData.length; i++) {
+            console.log(testData[i].author);
+            if(testData[i].author == req.params.user) {
+                console.log(testData[i].author);
+                selPost.push(testData[i]);
+                console.log('added');
+            }
+        }
+
+        console.log(testData[0].author);
+        console.log(selPost);
+        console.log(req.params.user);
+
+        res.render('homepage', 
+        {
+            selPost,
+            loggedIn: req.session.loggedIn,
+        });
     }catch (err) {
         console.log(err);
         
@@ -123,6 +143,15 @@ router.get('/posts/:user', async (req, res) => {
         return;
     }
     res.render('login');
-})
+});
+
+router.get('*', (req, res) => {
+    try {
+        res.render('error');
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500),json(err);
+    }
+});
 
 module.exports = router;
