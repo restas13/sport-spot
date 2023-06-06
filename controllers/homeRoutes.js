@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../models')
+const { User, Post, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 const axios = require('axios');
 
@@ -17,7 +18,7 @@ const testData = [{
 },
 ]
 
-router.get('/', async (req, res) => {
+router.get('/', /*withAuth,*/ async (req, res) => {
     try {
         const dbLibData = await Comment.findAll({
             include: [
@@ -49,7 +50,7 @@ router.get('/', async (req, res) => {
 });
 
 
-
+// gets the posts with the id in the web address
 router.get('/posts/:id', async (req, res) => {
     try {
         const dbLibData = await Comment.findByPk(req.params.id, {
@@ -87,7 +88,7 @@ router.get('/posts/:id', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    if(req.session.loggedIn) {
+    if(req.session.logged_in) {
         res.redirect('/');
         return;
     }
