@@ -66,6 +66,34 @@ router.post('/newPost', withAuth, async (req, res) => {
     }
 });
 
+router.get('/posts/:id', async (req, res) => {
+    try {
+        const requestedPost = await Post.findAll({ where: { id: req.params.id } });
+
+        // const libraries = requestedPost.map((library) => {
+        //     library.get({ plain: true });
+        // });
+
+        const libraries = requestedPost.map((library) =>
+        library.get({ plain: true })
+    );
+
+        
+
+        console.log(requestedPost);
+        console.log(libraries);
+
+        res.render('homepage', {
+            libraries,
+            loggedIn: req.session.loggedIn,
+        })
+        
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500).json(err);
+    }
+})
+
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({
