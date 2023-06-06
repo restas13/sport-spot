@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Post, Comment } = require('../../models');
-const withAuth = require('../../util/auth');
+const withAuth = require('../../utils/auth');
+const express = require('express');
+
 
 // Render the discussion page for a specific game
 const renderDiscussionPage = async (req, res) => {
