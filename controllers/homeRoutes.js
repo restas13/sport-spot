@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { User, Post, Comment } = require('../../models');
-const withAuth = require('../../util/auth');
-const { renderDiscussionPage } = require('./discussionRoutes');
+const { User, Post, Comment } = require('../models');
+const withAuth = require('../utils/auth');
+const { renderDiscussionPage } = require('./api/discussionRoutes');
 
 router.get('/', async (req, res) => {
   try {
@@ -41,6 +41,7 @@ router.get('/logout', (req, res) => {
   }
 });
 
-router.get('/discussion/:gameId', renderDiscussionPage);
 
-module.exports = router;
+module.exports = {
+    renderDiscussionPage
+  };
