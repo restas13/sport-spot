@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discussion Page</title>
+  <link rel="stylesheet" type="text/css" href="../public/css/discussion.css" />
+  <!-- Add any necessary stylesheets -->
+</head>
+<body>
+  <h1>Discussion Page for Game ID: {{gameId}}</h1>
+
+  <!-- Add a form to post a new post -->
+  <form action="/discussion/{{gameId}}/posts" method="POST">
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="content" placeholder="Content" required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <!-- Display existing posts -->
+  {{#each posts}}
+    <div>
+      <h2>{{title}}</h2>
+      <p>{{content}}</p>
+      <!-- Add a form to update/delete the post -->
+      <form action="/discussion/{{gameId}}/posts/{{_id}}?_method=PUT" method="POST">
+        <input type="text" name="title" value="{{title}}" required>
+        <textarea name="content" required>{{content}}</textarea>
+        <button type="submit">Update</button>
+      </form>
+      <form action="/discussion/{{gameId}}/posts/{{_id}}?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  {{/each}}
+
+  <!-- Add any necessary JavaScript code -->
+  <script src="../public/js/discussion.js"></script>
+</body>
+</html>

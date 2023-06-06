@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { Library, SportPost, User } = require('../../models');
+
+const { Library, SportPost } = require('../../models');
+const express = require('express');
 
 router.get('/posts', async (req, res) => {
     try {

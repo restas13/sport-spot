@@ -1,8 +1,9 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+const axios = require('axios');
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-
-const axios = require('axios');
+const { renderDiscussionPage } = require('./api/discussionRoutes');
 
 const testData = [{
     id: 1,
@@ -25,7 +26,7 @@ router.get('/', async (req, res) => {
                 {
                     model: Post,
                     attributes: [
-                        'user_id', 
+                        'user_id',
                         'content',
                         'author',
                     ],
@@ -51,53 +52,19 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+
 });
 
 
-// gets the posts with the id in the web address
-router.get('/posts/:id', withAuth, async (req, res) => {
-    try {
-        const dbLibData = await Comment.findByPk(req.params.id, {
-            include: [
-                {
-                    model: Post,
-                    attributes: [
-                        'id',
-                        'content',
-                        ///'post_date',
-                    ],
-                },
-            ],
-        });
-
-        //const library = dbLibData.get({ plain: true });
-
-        const selPost = [testData[req.params.id - 1]];
-
-        console.log(req.params.id - 1);
-        console.log(selPost);
-
-        res.render('homepage', 
-        {
-            selPost,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(err.status || 500).json({
-            message: err.message,
-            error: err,
-        });
-    }
-})
 
 router.get('/login', (req, res) => {
-    if(req.session.logged_in) {
+    if (req.session.logged_in) {
         res.redirect('/');
-        return;
+    } else {
+        res.render('login');
     }
-    res.render('login');
 });
+
 
 router.get('/posts/user/:user', withAuth, async (req, res) => {
     try {
@@ -120,7 +87,7 @@ router.get('/posts/user/:user', withAuth, async (req, res) => {
 
         for (var i = 0; i < testData.length; i++) {
             console.log(testData[i].author);
-            if(testData[i].author == req.params.user) {
+            if (testData[i].author == req.params.user) {
                 console.log(testData[i].author);
                 selPost.push(testData[i]);
                 console.log('added');
@@ -131,61 +98,54 @@ router.get('/posts/user/:user', withAuth, async (req, res) => {
         console.log(selPost);
         console.log(req.params.user);
 
-        res.render('homepage', 
-        {
-            selPost,
-            loggedIn: req.session.loggedIn,
-        });
-    }catch (err) {
+        res.render('homepage',
+            {
+                selPost,
+                loggedIn: req.session.loggedIn,
+            });
+    } catch (err) {
         console.log(err);
-        
+
         res.status(err.status || 500).json({
             message: err.message,
             error: err,
         });
     }
-    
-    if(req.session.loggedIn) {
+
+    if (req.session.loggedIn) {
         res.render();
         return;
     }
     res.render('login');
 });
 
-/*
-router.get('/posts/search', async (req, res) => {
-    try{
+
+router.get('/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).redirect('/');
+        });
+    } else {
+        res.status(404).end();
+    }
+});
+
+router.get('/featuredGames', async (req, res) => {
+    try {
         const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
             headers: {
                 'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
-                'x-rapidapi-host': 'https://v2.nba.api-sports.io',
-            },
-            params: {
-                trend: 'true',
-                limit: 4,
+                'x-rapidapi-host': 'https://v2.nba.api-sports.io'
             }
         });
-
-        const processedRes = response.json();
-
-        console.log(response);
-        console.log(processedRes.status);
-        console.log(processedRes);
-
-        res.render('games', )
-    }catch(err) {
-        console.log(err);
-        res.status(err.status || 500).json();
+        const games = response.data.response;
+        res.render('featuredGames', { games });
+    }// Render the featuredGames view with the games data
+    catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-});
-*/
-router.get('*', (req, res) => {
-    try {
-        res.render('error');
-    }catch (err) {
-        console.log(err);
-        res.status(err.status || 500),json(err);
-    }
-});
+})
+
 
 module.exports = router;
