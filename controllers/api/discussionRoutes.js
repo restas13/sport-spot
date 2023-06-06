@@ -32,5 +32,4 @@ const renderDiscussionPage = async (req, res) => {
 
 router.get('/discussion/:gameId', renderDiscussionPage);
 
-
 module.exports = router;
