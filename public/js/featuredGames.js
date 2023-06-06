@@ -1,3 +1,5 @@
+console.log('test')
+
 var myHeaders = new Headers();
 myHeaders.append("x-rapidapi-key", "12e5cc60c495f0b959a91981be861758");
 myHeaders.append("x-rapidapi-host", "https://v2.nba.api-sports.io");
@@ -55,7 +57,7 @@ function displayStats() {
     }
 }
 
-//lastFiveGames();
+lastFiveGames();
 
 
 

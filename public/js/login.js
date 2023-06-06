@@ -27,6 +27,7 @@ document
     .querySelector('.login-form')
     .addEventListener('submit', loginHandler);
 
-document.querySelector('#submit-button').addEventListener('click', loginHandler);
 
-console.log('I hope this works');
+
+    
+
