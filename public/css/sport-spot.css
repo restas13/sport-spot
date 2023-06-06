@@ -2,24 +2,25 @@
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  flex-direction: row;
-  margin: 0;
 }
 
 .col-1 {
   background: #85bb65d5;
-  flex: 1;
+  flex:1;
 }
 
 .col-2 {
   display: flex;
   flex-direction: column;
-  flex: 5;
+  flex: 2;
 }
 
 .content {
@@ -32,52 +33,50 @@ body {
   min-height: 60vh;
 }
 
-header,
-footer {
+header {
   background: #a9b0b4;
-  height: 20vh;
+  padding: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  width: 80%;
+  height: auto;
+  border-radius: 20px;
+  margin: auto; /* to center the header */
 }
 
-header,
-footer,
-article,
-nav {
-  padding: 1em;
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #a9b0b4;
+  height: 10vh;
+  line-height: 5vh; 
 }
+
+
 
 .sidebar {
   background: #0f49f1;
   margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
   text-align: center;
   width: 200px;
-  height: auto;
 }
 
-.input-field,
-.user-id-field {
-  margin-bottom: 10px;
-  height: px;
+.input-field, .user-id-field, .comments-section #commentList div {
   margin-bottom: 10px;
   background-color: #f0f0f0;
-  padding: 10px;
   border-radius: 5px;
 }
 
 h1 {
-  text-align: center;
+  text-align:center;
 }
 
 .navigation-list {
   list-style: none;
   display: flex;
-  justify-content: space-between;
-  padding: 0;
-}
-
-.navigation-list li {
-  margin-right: 10px;
+  justify-content: space-between; /* corrected from 'justify-items: space between' */
+  padding: 4px;
 }
 
 .navigation-list li a {
@@ -102,9 +101,7 @@ h1 {
   font-weight: bold;
 }
 
-.comments-section #commentList {
-  margin-top: 10px;
-}
+
 
 .comments-section #commentList div {
   background-color: #f0f0f0;
@@ -116,4 +113,8 @@ h1 {
 .card {
   background: orange;
   color: black;
+  width: 200px;
+  height: 100px;
 }
+
+
