@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
 router.get('/newPost', withAuth, async (req, res) => {
     try {
         res.render('newPost');
-    }catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(err.status || 500).json(err);
     }
@@ -70,16 +70,9 @@ router.get('/posts/:id', async (req, res) => {
     try {
         const requestedPost = await Post.findAll({ where: { id: req.params.id } });
 
-        // const libraries = requestedPost.map((library) => {
-        //     library.get({ plain: true });
-        // });
-
         const libraries = requestedPost.map((library) =>
-        library.get({ plain: true })
-    );
-
-        
-
+            library.get({ plain: true })
+        );
         console.log(requestedPost);
         console.log(libraries);
 
@@ -87,8 +80,8 @@ router.get('/posts/:id', async (req, res) => {
             libraries,
             loggedIn: req.session.loggedIn,
         })
-        
-    }catch (err) {
+
+    } catch (err) {
         console.log(err);
         res.status(err.status || 500).json(err);
     }
@@ -135,6 +128,23 @@ router.get('/featuredGames', async (req, res) => {
 
 });
 
+router.get('/search', async (req, res) => {
+    try {
+        res.render('search');
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500).json(err);
+    }
+});
+
+router.get('/search/:gameid', withAuth, async (req, res) => {
+    try {
+
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500).json(err);
+    }
+})
 
 
 router.get('/login', (req, res) => {

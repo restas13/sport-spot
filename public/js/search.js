@@ -55,6 +55,7 @@ async function showResults() {
         game.append(pic2)
         document.body.append(game)
         game.addEventListener('click', function() {
+            document.redirect.send(`/search/${results.response[i].id}`);
             console.log('test');
         })
     }
