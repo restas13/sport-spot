@@ -1,71 +1,43 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #F0F0F0;
-}
-
-h1 {
-  color: #333;
-  text-align: center;
-  margin-top: 50px;
-  font-weight: 600;
-}
-
-form {
-  width: 80%;
-  margin: 30px auto;
-  background-color: #FFF;
-  padding: 20px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-form input[type="text"], form textarea {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: box-shadow 0.3s ease;
-}
-
-form input[type="text"]:focus, form textarea:focus {
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-form button[type="submit"] {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-form button[type="submit"]:hover {
-  background-color: #0056b3;
 }
 
 div {
-  width: 80%;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #FFF;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
-div h2 {
-  margin: 0;
-  font-weight: 600;
-  color: #007BFF;
+form {
+  margin-bottom: 15px;
 }
 
-div p {
-  margin: 10px 0;
-  color: #333;
+input[type="text"], textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  background-color: #007BFF;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#posts-container div {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#posts-container div:not(:last-child) {
+  margin-bottom: 15px;
 }
