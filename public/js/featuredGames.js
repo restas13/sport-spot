@@ -55,7 +55,7 @@ function displayStats() {
     }
 }
 
-//lastFiveGames();
+lastFiveGames();
 
 
 
