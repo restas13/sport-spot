@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models')
 
+const axios = require('axios');
+
 const testData = [{
     id: 1,
     title: 'The mavericks are pretty good this year!',
@@ -107,7 +109,7 @@ router.get('/posts/user/:user', async (req, res) => {
             ],
         });
 
-        //const selectposts = dbUserPosts.get({ plain: true });
+        //const selectposts = dbLibData.get({ plain: true });
 
         const selPost = [];
 
@@ -143,6 +145,32 @@ router.get('/posts/user/:user', async (req, res) => {
         return;
     }
     res.render('login');
+});
+
+router.get('/posts/search', async (req, res) => {
+    try{
+        const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
+            headers: {
+                'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
+                'x-rapidapi-host': 'https://v2.nba.api-sports.io',
+            },
+            params: {
+                trend: 'true',
+                limit: 4,
+            }
+        });
+
+        const processedRes = response.json();
+
+        console.log(response);
+        console.log(processedRes.status);
+        console.log(processedRes);
+
+        res.render('games', )
+    }catch(err) {
+        console.log(err);
+        res.status(err.status || 500).json();
+    }
 });
 
 router.get('*', (req, res) => {
