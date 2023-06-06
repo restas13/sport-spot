@@ -11,6 +11,8 @@ const loginHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
+        console.log('referenced');
+
         if (response.ok) {
             document.location.replace('/');
         } else {
@@ -19,6 +21,13 @@ const loginHandler = async (event) => {
         }
     }
 };
+
+
 document
     .querySelector('.login-form')
     .addEventListener('submit', loginHandler);
+
+
+
+    
+

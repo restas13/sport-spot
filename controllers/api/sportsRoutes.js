@@ -1,5 +1,7 @@
 const router = require('express').Router();
+
 const { Library, SportPost } = require('../../models');
+const express = require('express');
 
 router.get('/posts', async (req, res) => {
     try {
@@ -7,7 +9,7 @@ router.get('/posts', async (req, res) => {
             include: [
                 {
                     model: SportPost,
-                    attributes: ['author', 'message'],
+                    attributes: ['user_id', 'content'],
                 },
             ]
         });
@@ -49,5 +51,30 @@ router.get('/posts/:id', async (req, res) => {
         });
     }
 });
+
+/*
+
+router.get('/users/login', async (req, res) => {
+    try {
+        const userLibData = await Library.findAll({
+            include: [{
+                model: User,
+                attributes: [
+                    'email',
+                    'password',
+                ]
+            }
+            ]
+        });
+        console.log('referenced');
+        
+        const library = userLibData.get({ plain: true });
+
+        res.send(library);
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500).json(err);
+    }
+});*/
 
 module.exports = router;
