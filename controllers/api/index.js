@@ -12,6 +12,7 @@ router.use('/discussion', discussionRoutes);
 router.use('/sports', sportsRoutes);
 router.use('/featuredGames', featuredGamesRoutes);
 
+
 module.exports = router;
 
 
