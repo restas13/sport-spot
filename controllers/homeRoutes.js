@@ -18,7 +18,7 @@ const testData = [{
 },
 ]
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', /*withAuth,*/ async (req, res) => {
     try {
         const dbLibData = await Comment.findAll({
             include: [
@@ -50,7 +50,7 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 
-
+// gets the posts with the id in the web address
 router.get('/posts/:id', async (req, res) => {
     try {
         const dbLibData = await Comment.findByPk(req.params.id, {
