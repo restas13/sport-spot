@@ -7,6 +7,7 @@ router.post('/signup', async (req, res) => {
     const newUser = await User.create({
       username: req.body.username,
       password: req.body.password,
+      email: req.body.email,
     });
 
     req.session.save(() => {
