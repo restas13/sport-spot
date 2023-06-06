@@ -18,13 +18,17 @@ const testData = [{
 },
 ]
 
-router.get('/', /*withAuth,*/ async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const dbLibData = await Comment.findAll({
             include: [
                 {
                     model: Post,
-                    attributes: ['user_id', 'content'],
+                    attributes: [
+                        'user_id', 
+                        'content',
+                        'author',
+                    ],
                 },
             ]
         });
@@ -104,13 +108,13 @@ router.get('/posts/user/:user', withAuth, async (req, res) => {
                     attributes: [
                         'id',
                         'content',
-                        //'post_date',
+                        //'author',
                     ],
                 },
             ],
         });
 
-        //const selectposts = dbLibData.get({ plain: true });
+        const selectposts = dbLibData.get({ plain: true });
 
         const selPost = [];
 
