@@ -5,7 +5,7 @@ const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 const { renderDiscussionPage } = require('./api/discussionRoutes');
 
-
+/*
 const testData = [{
     id: 1,
     title: 'The mavericks are pretty good this year!',
@@ -19,34 +19,22 @@ const testData = [{
     author: 'Grant',
 },
 ]
+*/
 
 router.get('/', async (req, res) => {
     try {
-        const dbLibData = await Comment.findAll({
-            include: [
-                {
-                    model: Post,
-                    attributes: [
-                        'user_id',
-                        'content',
-                        'author',
-                    ],
-                },
-            ]
+        const dbLibData = await Post.findAll({
+
         });
 
         const libraries = dbLibData.map((library) =>
-            Library.get({ plain: true })
+            library.get({ plain: true })
         );
 
-        console.log(req.session.loggedIn);
-        console.log('hello test');
         console.log(libraries);
 
-        const selPost = testData;
-
         res.render('homepage', {
-            selPost,
+            libraries,
             loggedIn: req.session.loggedIn,
         });
     } catch (err) {
@@ -55,23 +43,67 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/newPost', withAuth, async (req, res) => {
+    try {
+        res.render('newPost');
+    }catch (err) {
+        console.log(err);
+        res.status(err.status || 500).json(err);
+    }
+});
+
+router.post('/newPost', withAuth, async (req, res) => {
+    try {
+        const newPost = await Post.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        });
+
+        res.status(200).json(newPost);
+    } catch (err) {
+        console.log(err);
+        res.status(err.status || 500), json(err);
+    }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id,
+            },
+        });
+
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id!' });
+            return;
+        }
+
+        res.status(200).json(postData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 
 router.get('/featuredGames', async (req, res) => {
-  try {
-    const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
-      headers: {
-        'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
-        'x-rapidapi-host': 'https://v2.nba.api-sports.io'
-      }
-    });
-    const games = response.data.response;
+    try {
+        const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
+            headers: {
+                'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
+                'x-rapidapi-host': 'https://v2.nba.api-sports.io'
+            }
+        });
+        const games = response.data.response;
 
-    // Render the featuredGames view with the games data
-    res.render('featuredGames', { games });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
+        // Render the featuredGames view with the games data
+        res.render('featuredGames', { games });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 
 });
 
@@ -88,39 +120,30 @@ router.get('/login', (req, res) => {
 
 router.get('/posts/user/:user', withAuth, async (req, res) => {
     try {
-        const dbLibData = await Comment.findByPk(req.params.user, {
-            include: [
-                {
-                    model: Post,
-                    attributes: [
-                        'id',
-                        'content',
-                        //'author',
-                    ],
-                },
-            ],
+        const dbLibData = await Post.findAll({
+
         });
 
-        const selectposts = dbLibData.get({ plain: true });
+        const library = dbLibData.map((librarys) =>
+            librarys.get({ plain: true })
+        );
 
-        const selPost = [];
+        const libraries = [];
 
-        for (var i = 0; i < testData.length; i++) {
-            console.log(testData[i].author);
-            if (testData[i].author == req.params.user) {
-                console.log(testData[i].author);
-                selPost.push(testData[i]);
+        for (var i = 0; i < library.length; i++) {
+            console.log(library[i].author);
+            if (library[i].author == req.params.user) {
+                console.log(library[i].author);
+                libraries.push(library[i]);
                 console.log('added');
             }
         }
 
-        console.log(testData[0].author);
-        console.log(selPost);
-        console.log(req.params.user);
+        console.log(libraries);
 
         res.render('homepage',
             {
-                selPost,
+                libraries,
                 loggedIn: req.session.loggedIn,
             });
     } catch (err) {
