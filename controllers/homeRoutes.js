@@ -39,7 +39,7 @@ router.get('/', /*withAuth,*/ async (req, res) => {
 
         const selPost = testData;
 
-        res.render('homepage', {
+        res.render('featured', {
             selPost,
             loggedIn: req.session.loggedIn,
         });
@@ -73,7 +73,7 @@ router.get('/posts/:id', async (req, res) => {
         console.log(req.params.id - 1);
         console.log(selPost);
 
-        res.render('homepage', 
+        res.render('featured', 
         {
             selPost,
             loggedIn: req.session.loggedIn,
@@ -127,7 +127,7 @@ router.get('/posts/user/:user', async (req, res) => {
         console.log(selPost);
         console.log(req.params.user);
 
-        res.render('homepage', 
+        res.render('featured', 
         {
             selPost,
             loggedIn: req.session.loggedIn,
