@@ -5,6 +5,7 @@ const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 const { renderDiscussionPage } = require('./api/discussionRoutes');
 
+
 const testData = [{
     id: 1,
     title: 'The mavericks are pretty good this year!',
@@ -52,6 +53,25 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+});
+
+
+router.get('/featuredGames', async (req, res) => {
+  try {
+    const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
+      headers: {
+        'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
+        'x-rapidapi-host': 'https://v2.nba.api-sports.io'
+      }
+    });
+    const games = response.data.response;
+
+    // Render the featuredGames view with the games data
+    res.render('featuredGames', { games });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 
 });
 
@@ -129,23 +149,5 @@ router.get('/logout', (req, res) => {
         res.status(404).end();
     }
 });
-
-router.get('/featuredGames', async (req, res) => {
-    try {
-        const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
-            headers: {
-                'x-rapidapi-key': '12e5cc60c495f0b959a91981be861758',
-                'x-rapidapi-host': 'https://v2.nba.api-sports.io'
-            }
-        });
-        const games = response.data.response;
-        res.render('featuredGames', { games });
-    }// Render the featuredGames view with the games data
-    catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-})
-
 
 module.exports = router;
