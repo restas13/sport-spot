@@ -27,7 +27,7 @@ router.get('/posts', async (req, res) => {
 
 router.post('/posts', async (req, res) => {
     try {
-        const userLibData = await User.findOne({ where: { id: 1 } });
+        const userLibData = await User.findOne({ where: { id: req.session.user_id } });
 
         console.log(userLibData);
 
