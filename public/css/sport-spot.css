@@ -52,6 +52,11 @@ footer {
   height: 10vh;
   line-height: 5vh; 
 }
+footer p {
+  text-align: center;
+
+
+}
 
 
 
