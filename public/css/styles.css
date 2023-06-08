@@ -1,14 +1,38 @@
 /* styles.css */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
+body {
+
+  background-color: rgb(244, 193, 99);
+}
+
+.header1 {
+  background: rgb(169, 246, 169);
+  padding: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: auto;
+  font-size: 20Px;
+}
 div {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: orange;
-    padding: 30px;
-    margin: 30px;
+    padding: 10px;
+    margin: 10px;
     font-size: 30px;
     border-radius: 10px;
+    width: 100%;
+    
   }
   
   .pic {
@@ -18,17 +42,38 @@ div {
     flex-direction: column;
   }
   
-  .stats {
-    display: flex;
-    flex-direction: column;
+  .game {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stats  {
+    display:flex;
+    height: 20%;
   }
   
   .info {
     display: flex;
-    justify-content: space-between;
-    width: 500px;
+    
+    width: 100px;
   }
-  
+
+
+  p {
+   justify-content: center;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(27, 27, 78); 
+
+  }
+
+
+h3 {
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+}
   ul {
     border: 5px solid black;
     background-color: lightblue;
@@ -37,12 +82,48 @@ div {
   }
   
   #homePic {
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
   }
   
   #visitorPic {
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
   }
+
+
+  #postForm {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+    font-size: large;
+    height: 40%;
+   
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+}
+
+#postTitle {
+    width: 400px;
+    height: 30px;
+    align-items:flex-start;
+    justify-content: space-arround;
+}
+
+#postContent {
+    width: 400px;
+    height: 50px;
+    align-items: flex-start;
+    justify-content: space-arround;
+}
+
+#submit-button  {
+margin-top: -10px;
+    border-radius: 5px;
+    color: blue;
+    width: 50px;
+    height: 30px;
+    align-items: flex-start;
+}
   

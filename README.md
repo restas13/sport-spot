@@ -61,7 +61,7 @@ Clone: inside GitBash, use the command `git clone paste link here`
 
 link to application : 
 
-https://
+https://github.com/restas13/sport-spot.git
 
 
 
@@ -161,7 +161,7 @@ This project is licensed under the MIT license.
 
 ## How to Contribute
 
-Please contact me
+Please contact us
 
 ## Tests
 
@@ -172,8 +172,6 @@ N/A
 If you have any questions about this repository, you might want to open an issue or contact us at 
 
 ## Features
-
-
 
 
 ## Credits

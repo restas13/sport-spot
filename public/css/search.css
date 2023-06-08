@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+
+    background-color: rgb(244, 193, 99);
+}
+
+.header1 {
+    background: rgb(169, 246, 169);
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: auto;
+    font-size: 20Px;
+}
+
+
+#postForm {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+    font-size: large;
+    
+    background-color: aliceblue;
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+}
+
+#postTitle {
+    width: 400px;
+    height: 30px;
+    align-items:flex-start;
+    justify-content: space-arround;
+}
+
+#postContent {
+    width: 400px;
+    height: 50px;
+    align-items: flex-start;
+    justify-content: space-arround;
+}
+
+#submit-button  {
+margin-top: -10px;
+    border-radius: 5px;
+    color: blue;
+    width: 50px;
+    height: 30px;
+    align-items: flex-start;
+}
+
+
+
+
+
+#divideLists {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 0;
+}
+
+div {
+    display: flex;
+    padding: 30px;
+    font-size: 30px;
+}
+
+
+
+.pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+ul {
+    border: 5px solid black;
+    background-color: lightblue;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#homePic {
+    height: 200px;
+    width: 200px;
+}
+
+#visitorPic {
+    height: 200px;
+    width: 200px;
+}
