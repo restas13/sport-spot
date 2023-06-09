@@ -144,12 +144,10 @@ Open the terminal  and run the command `npm start` or `node server.js`
 
 In you browser you will want to run `localhost:3001/`,
 
-
-
-![Screenshot 1]
-![Screenshot 2]
-![Screenshot 3]
-![Screenshot 4]
+![Screenshot1](https://github.com/restas13/sport-spot/assets/120201085/04c18cc8-8d2b-409d-8a2d-2dba893568d8)
+![Screenshot 2](https://github.com/restas13/sport-spot/assets/120201085/cfa72ed4-7e0d-4303-a778-4fc080d3eeb6)
+![Screenshot 3](https://github.com/restas13/sport-spot/assets/120201085/8acee9fa-7a87-4787-8294-d2118e09fe28)
+![Screenshot 2023-06-08 170642](https://github.com/restas13/sport-spot/assets/120201085/64a76672-1edf-4b6d-8b64-6c2c656f082c)
 
 
 
