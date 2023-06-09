@@ -12,7 +12,7 @@ form {
 
 input[type="text"], textarea {
   display: block;
-  width: 100%;
+  width: 40%;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;

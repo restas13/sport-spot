@@ -5,21 +5,7 @@ const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 const { renderDiscussionPage } = require('./api/discussionRoutes');
 
-/*
-const testData = [{
-    id: 1,
-    title: 'The mavericks are pretty good this year!',
-    message: 'I\'m happy with their performance on tuesday and I\'m running out of text to write',
-    author: 'Reed',
-},
-{
-    id: 2,
-    title: 'The Denver nuggets did pretty good',
-    message: 'The Nuggets have been doing great this season, I think they have a real shot at winning!',
-    author: 'Grant',
-},
-]
-*/
+
 
 router.get('/', async (req, res) => {
     try {

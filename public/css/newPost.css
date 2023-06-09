@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f2f2f2;
+  }
+  
+  h3 {
+    color:darkgrey;
+  }
+  
+  .form {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    color: #fff;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background: #0056b3;
+  }
+  
+  .btn:disabled {
+    background: #ccc;
+    cursor: default;
+  }
+  
+  .edit-button,
+  .delete-button {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button {
+    background: #f0ad4e;
+  }
+  
+  .edit-button:hover {
+    background: #ec971f;
+  }
+  
+  .delete-button {
+    background: #d9534f;
+  }
+  
+  .delete-button:hover {
+    background: #c9302c;
+  }
+  

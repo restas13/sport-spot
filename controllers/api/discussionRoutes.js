@@ -13,7 +13,7 @@ router.get('/', withAuth, async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     res.render('all-posts-admin', {
-      layout: 'discussion',
+      layout: 'discussion.html',
       posts,
     });
   } catch (err) {
@@ -23,7 +23,7 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/new', withAuth, (req, res) => {
   res.render('new-post', {
-    layout: 'discussion',
+    layout: 'discussion.html',
   });
 });
 
@@ -35,7 +35,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
       const post = postData.get({ plain: true });
 
       res.render('edit-post', {
-        layout: 'discussion',
+        layout: 'discussion.html',
         post,
       });
     } else {
@@ -103,3 +103,6 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 module.exports = router;
+
+
+

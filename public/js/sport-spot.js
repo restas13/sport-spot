@@ -1,24 +1,72 @@
-const userComment = localStorage.getItem('userComment');
-  if (userComment) {
-    document.getElementById('inputField').value = userComment;
-  }
 
-  // Store user comment to local storage on submit and append to comments section
-  document.getElementById('submitBtn').addEventListener('click', function() {
-    const comment = document.getElementById('inputField').value;
-    localStorage.setItem('userComment', comment);
-    appendCommentToWebpage(comment);
+document.addEventListener('DOMContentLoaded', (event) => {
+  const postForm = document.getElementById('postForm');
+  const postTitle = document.getElementById('postTitle');
+  const postContent = document.getElementById('postContent');
+  const submitButton = document.getElementById('submit-button');
+  const updateButton = document.getElementById('update-button');
+  const postList = document.getElementById('postList');
+  
+  let posts = JSON.parse(localStorage.getItem('posts')) || [];
+  let isUpdateMode = false;
+  let postToUpdate = null;
+  
+  function renderPosts() {
+    postList.innerHTML = '';
+    const template = Handlebars.compile(document.getElementById('post-template').innerHTML);
+    
+    posts.forEach((post, index) => {
+      const html = template(post);
+      const postDiv = document.createElement('div');
+      postDiv.innerHTML = html;
+      postDiv.querySelector('.edit-button').addEventListener('click', function() {
+        isUpdateMode = true;
+        postToUpdate = index;
+        postTitle.value = post.title;
+        postContent.value = post.content;
+        submitButton.style.display = 'none';
+        updateButton.style.display = 'block';
+      });
+      postDiv.querySelector('.delete-button').addEventListener('click', function() {
+        posts.splice(index, 1);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        renderPosts();
+      });
+      postList.appendChild(postDiv);
+    });
+  }
+  
+  renderPosts();
+  
+  postForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const title = postTitle.value;
+    const content = postContent.value;
+    if (isUpdateMode) {
+      posts[postToUpdate] = { title, content };
+      isUpdateMode = false;
+      submitButton.style.display = 'block';
+      updateButton.style.display = 'none';
+      postTitle.value = '';
+      postContent.value = '';
+    } else {
+      posts.push({ title, content });
+    }
+    localStorage.setItem('posts', JSON.stringify(posts));
+    renderPosts();
   });
-
-  // Append user comment to the comments section
-  function appendCommentToWebpage(comment) {
-    const commentContainer = document.createElement('div');
-    commentContainer.textContent = comment;
-    document.getElementById('commentList').appendChild(commentContainer);
-  }
-
-  // Retrieve user ID from local storage and append it to the webpage
-  const userID = localStorage.getItem('userID');
-  if (userID) {
-    document.getElementById('userID').textContent = userID;
-  }
+  
+  updateButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const title = postTitle.value;
+    const content = postContent.value;
+    posts[postToUpdate] = { title, content };
+    isUpdateMode = false;
+    submitButton.style.display = 'block';
+    updateButton.style.display = 'none';
+    postTitle.value = '';
+    postContent.value = '';
+    localStorage.setItem('posts', JSON.stringify(posts));
+    renderPosts();
+  });
+});
