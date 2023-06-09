@@ -104,9 +104,6 @@ transition: all 0.5s ease-in-out;
   border-radius: 5px;
 }
 
-
-
-
 h1 {
   text-align:center;
 }
@@ -140,13 +137,7 @@ h1 {
   text-align: center; 
   width: 20%; 
   align-items: flex-start;
-  
-  
 }
-
-
-
-
 
 .comments-section {
   margin-top: 20px;
@@ -157,8 +148,6 @@ h1 {
   font-weight: bold;
 }
 
-
-
 .comments-section #commentList div {
   background-color: #f0f0f0;
   padding: 10px;
@@ -166,11 +155,11 @@ h1 {
   margin-bottom: 10px;
 }
 
+h3 {
+  color:darkgrey;
 
+}
  
-
-
-
 footer {
   position: absolute;
   bottom: 0;
