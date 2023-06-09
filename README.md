@@ -68,6 +68,9 @@ https://github.com/restas13/sport-spot.git
 link to deplyed application:
 
 
+https://git.heroku.com/sport-spot-group7.git
+
+
 https://
 
 
