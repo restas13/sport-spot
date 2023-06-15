@@ -1,24 +1,22 @@
 const router = require('express').Router();
-
-const { User, Library, SportPost, Post } = require('../../models');
-const express = require('express');
+const { User, Post } = require('../../models');
 
 router.get('/posts', async (req, res) => {
     try {
-        const dbLibData = await Library.findAll({
+        const dbPostData = await Post.findAll({
             include: [
                 {
-                    model: SportPost,
-                    attributes: ['user_id', 'content'],
+                    model: User,
+                    attributes: ['username'],
                 },
             ]
         });
 
-        const libraries = dbLibData.map((library) =>
-            Library.get({ plain: true })
+        const posts = dbPostData.map((post) =>
+            post.get({ plain: true })
         );
 
-        res.send(libraries);
+        res.send(posts);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -27,15 +25,11 @@ router.get('/posts', async (req, res) => {
 
 router.post('/posts', async (req, res) => {
     try {
-        const userLibData = await User.findOne({ where: { id: req.session.user_id } });
-
-        console.log(userLibData);
-
-        console.log(req.session);
+        const userPostData = await User.findOne({ where: { id: req.session.user_id } });
         const newPost = await Post.create({
             ...req.body,
             user_id: req.session.user_id,
-            author: userLibData.username,
+            author: userPostData.username,
         });
 
         res.status(200).json(newPost);
@@ -47,22 +41,20 @@ router.post('/posts', async (req, res) => {
 
 router.get('/posts/:id', async (req, res) => {
     try {
-        const dbLibData = await Library.findByPk(req.params.id, {
+        const dbPostData = await Post.findByPk(req.params.id, {
             include: [
                 {
-                    model: SportPost,
+                    model: User,
                     attributes: [
-                        'id',
-                        'message',
-                        'post_date',
+                        'username',
                     ],
                 },
             ],
         });
 
-        const library = dbLibData.get({ plain: true });
+        const post = dbPostData.get({ plain: true });
 
-        res.send(library);
+        res.send(post);
     } catch (err) {
         console.log(err);
         res.status(err.status || 500).json({
@@ -72,29 +64,24 @@ router.get('/posts/:id', async (req, res) => {
     }
 });
 
-/*
-
-router.get('/users/login', async (req, res) => {
+router.delete('/posts/:id', async (req, res) => {
     try {
-        const userLibData = await Library.findAll({
-            include: [{
-                model: User,
-                attributes: [
-                    'email',
-                    'password',
-                ]
+        const deletedRows = await Post.destroy({
+            where: {
+                id: req.params.id
             }
-            ]
         });
-        console.log('referenced');
-        
-        const library = userLibData.get({ plain: true });
 
-        res.send(library);
-    }catch (err) {
+        if (deletedRows > 0) {
+            res.status(200).json({ message: 'Post deleted successfully.' });
+        } else {
+            res.status(404).json({ message: 'Post not found.' });
+        }
+    } catch (err) {
         console.log(err);
-        res.status(err.status || 500).json(err);
+        res.status(500).json(err);
     }
-});*/
+});
+
 
 module.exports = router;

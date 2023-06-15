@@ -5,4 +5,9 @@
     <a href="/">Go to Homepage</a>
   </div>
 </section>
-<script src="../public/js/logout.js"></script>
+<script>
+    // Optional: automatically redirect to the homepage after 5 seconds
+    setTimeout(() => {
+        window.location.href = "/";
+    }, 5000);
+</script>
