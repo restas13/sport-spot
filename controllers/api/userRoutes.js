@@ -49,6 +49,18 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// user logout using get
+router.get('/logout', (req, res) => {
+  if (req.session.logged_in) {
+      req.session.destroy(() => {
+          res.redirect('/');
+      });
+  } else {
+      res.redirect('/');
+  }
+});
+
+
 // User logout
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
@@ -59,5 +71,8 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+
+
 
 module.exports = router;

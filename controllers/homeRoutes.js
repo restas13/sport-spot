@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-const { renderDiscussionPage } = require('./api/discussionRoutes');
+
 
 
 
@@ -26,29 +26,6 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
-    }
-});
-
-router.get('/newPost', withAuth, async (req, res) => {
-    try {
-        res.render('newPost');
-    } catch (err) {
-        console.log(err);
-        res.status(err.status || 500).json(err);
-    }
-});
-
-router.post('/newPost', withAuth, async (req, res) => {
-    try {
-        const newPost = await Post.create({
-            ...req.body,
-            user_id: req.session.user_id,
-        });
-
-        res.status(200).json(newPost);
-    } catch (err) {
-        console.log(err);
-        res.status(err.status || 500), json(err);
     }
 });
 
@@ -95,6 +72,8 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 
+
+// route for NBA API
 router.get('/featuredGames', async (req, res) => {
     try {
         const response = await axios.get('https://v2.nba.api-sports.io/games?league=standard&season=2022', {
@@ -132,7 +111,7 @@ router.get('/search/:gameid', withAuth, async (req, res) => {
     }
 })
 
-
+//user Route
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/');
@@ -140,52 +119,6 @@ router.get('/login', (req, res) => {
         res.render('login');
     }
 });
-
-
-router.get('/posts/user/:user', withAuth, async (req, res) => {
-    try {
-        const dbLibData = await Post.findAll({
-
-        });
-
-        const library = dbLibData.map((librarys) =>
-            librarys.get({ plain: true })
-        );
-
-        const libraries = [];
-
-        for (var i = 0; i < library.length; i++) {
-            console.log(library[i].author);
-            if (library[i].author == req.params.user) {
-                console.log(library[i].author);
-                libraries.push(library[i]);
-                console.log('added');
-            }
-        }
-
-        console.log(libraries);
-
-        res.render('homepage',
-            {
-                libraries,
-                loggedIn: req.session.loggedIn,
-            });
-    } catch (err) {
-        console.log(err);
-
-        res.status(err.status || 500).json({
-            message: err.message,
-            error: err,
-        });
-    }
-
-    if (req.session.loggedIn) {
-        res.render();
-        return;
-    }
-    res.render('login');
-});
-
 
 router.get('/logout', (req, res) => {
     if (req.session.logged_in) {

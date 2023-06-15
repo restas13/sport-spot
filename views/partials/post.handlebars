@@ -1,8 +1,12 @@
-<section class="card">
+<div class="card">
   <a href="/posts/{{id}}">
     <h3>{{title}}</h3>
   </a>
-    <p>{{content}}</p>
-    <p>Written by: <a href="/posts/user/{{author}}">{{author}}</a></p>
+  <p>{{content}}</p>
+  <p>Written by: <a href="/posts/user/{{author}}">{{author}}</a></p>
   
-</section>
+  <!-- Adding  Delete buttons for each post -->
+  <div>
+    <button class="btn btn-danger delete-btn" data-id="{{id}}">Delete</button>
+  </div>
+</div>

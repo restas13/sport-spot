@@ -171,9 +171,86 @@ footer {
 footer p {
   text-align: center;
 
-
 }
 
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+    .header1 {
+        padding: 20px;
+        font-size: 18px;
+    }
 
+    #myBackGround {
+        height: 200px;
+    }
 
+    .input-field, .user-id-field, .comments-section #commentList div {
+        width: 80%;
+    }
 
+    .content > article {
+        min-height: 50vh;
+    }
+
+    #sidebar {
+        width: 50%;
+    }
+
+    .card {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header1 {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    #myBackGround {
+        height: 150px;
+    }
+
+    .input-field, .user-id-field, .comments-section #commentList div {
+        width: 90%;
+    }
+
+    .content > article {
+        min-height: 40vh;
+    }
+
+    #sidebar {
+        width: 100%;
+    }
+
+    .card {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header1 {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #myBackGround {
+        height: 100px;
+    }
+
+    .input-field, .user-id-field, .comments-section #commentList div {
+        width: 100%;
+    }
+
+    .content > article {
+        min-height: 30vh;
+    }
+
+    #sidebar {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+    }
+}

@@ -127,4 +127,72 @@ margin-top: -10px;
     height: 30px;
     align-items: flex-start;
 }
-  
+ 
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+    .header1 {
+        padding: 20px;
+        font-size: 18px;
+    }
+
+    div, .pic, .game, .stats, .info {
+        flex-direction: column;
+    }
+
+    #postTitle, #postContent {
+        width: 80%;
+    }
+
+    #homePic, #visitorPic {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header1 {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    div, .pic, .game, .stats, .info {
+        flex-direction: column;
+    }
+
+    #postTitle, #postContent {
+        width: 90%;
+    }
+
+    #homePic, #visitorPic {
+        height: 80px;
+        width: 80px;
+    }
+
+    p, h3 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header1 {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    div, .pic, .game, .stats, .info {
+        flex-direction: column;
+    }
+
+    #postTitle, #postContent {
+        width: 100%;
+    }
+
+    #homePic, #visitorPic {
+        height: 60px;
+        width: 60px;
+    }
+
+    p, h3 {
+        font-size: 20px;
+    }
+}

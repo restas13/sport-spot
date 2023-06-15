@@ -5,7 +5,6 @@ async function createPost(event) {
     const content = document.querySelector('#postContent').value.trim();
 
     if (title && content) {
-        console.log('response');
         const response = await fetch('/api/sports/posts', {
             method: 'POST',
             body: JSON.stringify({ title, content }),
@@ -13,8 +12,6 @@ async function createPost(event) {
                 'Content-Type': 'application/json',
             },
         });
-
-        console.log(response);
 
         if (response.ok) {
             document.location.reload();
@@ -24,4 +21,34 @@ async function createPost(event) {
     }
 };
 
-document.querySelector('#postForm').addEventListener('submit', createPost);
+async function deletePost(event) {
+    event.preventDefault();
+
+    const postId = event.target.getAttribute('data-id');
+    
+    if (postId) {
+        try {
+            const response = await fetch(`/api/sports/posts/${postId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                console.error(`Server responded with: ${response.status}`);
+                alert('Failed to delete post');
+            } else {
+                document.location.reload();
+            }
+        } catch (err) {
+            console.error('Fetch Error:', err);
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', deletePost);
+    });
+
+    document.querySelector('#postForm').addEventListener('submit', createPost);
+});
+

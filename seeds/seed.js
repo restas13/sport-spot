@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { User, Post } = require('../models');
 
-/*
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Hash password using bcrypt
@@ -18,6 +18,16 @@ module.exports = {
         username: 'poisonGamesyt',
         password: hashedPassword,
       },
+      {
+        username: 'GameLover01',
+        email: 'gameLover01@gmail.com',
+        password: '123789wx',
+      },
+      {
+        username: '3pointsonly',
+        email: '3pointsolnly@gmail.com',
+        password: 'wx123vb',
+      },
       // Add more users as needed
     ]);
   },
@@ -26,7 +36,7 @@ module.exports = {
     // Delete all users
     await User.destroy({ where: {} });
   },
-};*/
+};
 
 const postData = require('./posts.json');
 const userData = require('./userData.json');
