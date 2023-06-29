@@ -111,6 +111,49 @@ router.get('/search/:gameid', withAuth, async (req, res) => {
     }
 })
 
+router.get('/posts/user/:user', withAuth, async (req, res) => {
+    try {
+        const dbLibData = await Post.findAll({
+
+        });
+
+        const library = dbLibData.map((librarys) =>
+            librarys.get({ plain: true })
+        );
+
+        const libraries = [];
+
+        for (var i = 0; i < library.length; i++) {
+            console.log(library[i].author);
+            if (library[i].author == req.params.user) {
+                console.log(library[i].author);
+                libraries.push(library[i]);
+                console.log('added');
+            }
+        }
+
+        console.log(libraries);
+
+        res.render('homepage',
+            {
+                libraries,
+                loggedIn: req.session.loggedIn,
+            });
+    } catch (err) {
+        console.log(err);
+
+        res.status(err.status || 500).json({
+            message: err.message,
+            error: err,
+        });
+    }
+
+    if (req.session.loggedIn) {
+        res.render();
+        return;
+    }
+    res.render('login');
+});
 //user Route
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
