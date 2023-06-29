@@ -71,19 +71,6 @@ link to deployed application:
 https://sport-spot-group7.herokuapp.com/
 
 
-https://
-
-
-
-
-
-
-
-
-
-
-
-
                                                  Third: 
 
 If you don't have the dependencies :
