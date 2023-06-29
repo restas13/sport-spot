@@ -15,14 +15,17 @@ Moreover, this application is MVC structured and  uses o multiple packages such 
 
 
  
-  1. [Installation](#installation)
-  2. [Usage](#usage)
-  3. [License](#license)
-  4. [Contributing](#contributing)
-  5. [Tests](#tests)
-  6. [Questions](#questions)
-  7. [Features](#features)
-  8. [Credits](#credits)
+- [project2-group7](#project2-group7)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [How to Contribute](#how-to-contribute)
+  - [Tests](#tests)
+  - [Questions](#questions)
+  - [Features](#features)
+  - [Credits](#credits)
 
 ## Installation
 
@@ -64,14 +67,11 @@ link to application :
 https://github.com/restas13/sport-spot.git
 
 
+link to deployed application:
 
-link to deplyed application:
-
-
-https://git.heroku.com/sport-spot-group7.git
+https://sport-spot-group7.herokuapp.com/
 
 
-https://
 
 
 
