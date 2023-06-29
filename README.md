@@ -65,10 +65,10 @@ https://github.com/restas13/sport-spot.git
 
 
 
-link to deplyed application:
+link to deployed application:
 
 
-https://git.heroku.com/sport-spot-group7.git
+https://sport-spot-group7.herokuapp.com/
 
 
 https://
