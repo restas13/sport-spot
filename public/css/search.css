@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+
+    background-color: rgb(244, 193, 99);
+}
+
+.header1 {
+    background: rgb(169, 246, 169);
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: auto;
+    font-size: 20Px;
+}
+
+
+#postForm {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+    font-size: large;
+    
+    background-color: aliceblue;
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+}
+
+#postTitle {
+    width: 400px;
+    height: 30px;
+    align-items:flex-start;
+    justify-content: space-arround;
+}
+
+#postContent {
+    width: 400px;
+    height: 50px;
+    align-items: flex-start;
+    justify-content: space-arround;
+}
+
+#submit-button  {
+margin-top: -10px;
+    border-radius: 5px;
+    color: blue;
+    width: 50px;
+    height: 30px;
+    align-items: flex-start;
+}
+
+
+
+
+
+#divideLists {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 0;
+}
+
+div {
+    display: flex;
+    padding: 30px;
+    font-size: 30px;
+}
+
+
+
+.pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+ul {
+    border: 5px solid black;
+    background-color: lightblue;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#homePic {
+    height: 200px;
+    width: 200px;
+}
+
+#visitorPic {
+    height: 200px;
+    width: 200px;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+    .header1 {
+        font-size: 18px;
+        padding: 20px;
+    }
+  
+    div {
+        font-size: 25px;
+        padding: 20px;
+    }
+  
+    #postTitle, #postContent {
+        width: 80%;
+    }
+  
+    #homePic, #visitorPic {
+        height: 150px;
+        width: 150px;
+    }
+}
+  
+@media screen and (max-width: 900px) {
+    .header1 {
+        font-size: 16px;
+        padding: 15px;
+    }
+  
+    div {
+        font-size: 20px;
+        padding: 15px;
+    }
+  
+    #postTitle, #postContent {
+        width: 90%;
+    }
+  
+    #homePic, #visitorPic {
+        height: 100px;
+        width: 100px;
+    }
+}
+  
+@media screen and (max-width: 600px) {
+    .header1 {
+        font-size: 14px;
+        padding: 10px;
+    }
+  
+    div {
+        font-size: 18px;
+        padding: 10px;
+    }
+  
+    #postTitle, #postContent {
+        width: 95%;
+    }
+  
+    #homePic, #visitorPic {
+        height: 75px;
+        width: 75px;
+    }
+}
